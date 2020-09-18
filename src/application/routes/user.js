@@ -1,9 +1,10 @@
 const userControllers = require("../../modules/User/user.controllers");
+const validator = require("../../middlewares/validator");
 
 const userRoutes = (Router) => {
   const router = Router();
 
-  router.route("/").get(userControllers.createUser);
+  router.route("/").post(validator.validateUser, userControllers.createUser);
 
   return router;
 };

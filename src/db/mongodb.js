@@ -8,6 +8,7 @@ const boostrapApplication = (app) => {
   mongoose.connect(mongoBD, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useCreateIndex: true,
   });
   mongoose.connection.once("open", () => {
     logger.log("info", "Now connected to the database");

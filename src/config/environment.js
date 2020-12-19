@@ -2,7 +2,7 @@ const environmentConfig = () => {
   let envConfig = {};
 
   switch (process.env.NODE_ENV) {
-    case "staging":
+    case 'staging':
       break;
 
     default:

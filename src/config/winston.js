@@ -1,9 +1,9 @@
-const appRoot = require("app-root-path");
-const winston = require("winston");
+const appRoot = require('app-root-path');
+const winston = require('winston');
 
 const options = {
   file: {
-    level: "info",
+    level: 'info',
     filename: `${appRoot}/logs/app.log`,
     handleExceptions: true,
     json: true,
@@ -12,7 +12,7 @@ const options = {
     colorize: false,
   },
   console: {
-    level: "debug",
+    level: 'debug',
     handleExceptions: true,
     json: false,
     colorize: true,

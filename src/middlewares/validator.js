@@ -1,4 +1,4 @@
-const createUserValidator = require("../config/Joi/createUser");
+const createUserValidator = require('../config/Joi/createUser');
 
 const validator = {
   validateUser: async (req, res, next) => {

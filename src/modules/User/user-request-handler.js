@@ -1,4 +1,4 @@
-const makeHttpSuccess = require("../../common/http-success");
+const makeHttpSuccess = require('../../helpers/http-success');
 
 class UserRequestHandler {
   constructor({ userDbInteractor }) {
@@ -10,8 +10,8 @@ class UserRequestHandler {
 
     return makeHttpSuccess({
       statusCode: 200,
-      successMessage: "ok",
-      successData: "response",
+      successMessage: 'ok',
+      successData: body,
     });
   }
 }

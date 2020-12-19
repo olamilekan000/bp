@@ -1,22 +1,23 @@
-const mongoose = require("mongoose");
-const environmentConfig = require("../config/environment");
-const logger = require("../config/winston");
+const mongoose = require('mongoose');
+const environmentConfig = require('../config/environment');
+const logger = require('../config/winston');
 
-const boostrapApplication = (app) => {
-  const { mongoBD, port } = environmentConfig();
+const boostrapMongoose = () => new Promise((resolve, reject) => {
+  const { mongoBD } = environmentConfig();
 
   mongoose.connect(mongoBD, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
   });
-  mongoose.connection.once("open", () => {
-    logger.log("info", "Now connected to the database");
-    app.listen(port, () => logger.log("info", `app now listening on ${port}`));
+  mongoose.connection.once('open', () => {
+    logger.log('info', 'Now connected to the database');
+    resolve();
   });
-  mongoose.connection.on("error", () => {
-    logger.log("info", "Couldn't connect to the mongodb server");
+  mongoose.connection.on('error', () => {
+    logger.log('info', "Couldn't connect to the mongodb server");
+    reject();
   });
-};
+});
 
-module.exports = boostrapApplication;
+module.exports = boostrapMongoose;

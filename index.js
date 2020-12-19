@@ -1,8 +1,17 @@
-"use strict";
-require("dotenv").config();
-const server = require("./src/application/server");
-const boostrapApplication = require("./src/db/mongodb");
+require('dotenv').config();
 
-const app = server();
+const environmentConfig = require('./src/config/environment');
+const logger = require('./src/config/winston');
+const boostrapMongoose = require('./src/db/mongodb');
+const server = require('./src/server');
 
-boostrapApplication(app);
+(async () => {
+  try {
+    await boostrapMongoose();
+    const app = server();
+    const { port } = environmentConfig();
+    app.listen(port, () => logger.log('info', `app now listening on ${port}`));
+  } catch (e) {
+    throw e;
+  }
+})();

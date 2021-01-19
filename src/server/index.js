@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const helmet = require('helmet')
 
 const ErrorHandler = require('../helpers/error-handler');
 const apiRouter = require('./routes');
@@ -10,6 +11,7 @@ const server = () => {
   const app = express();
 
   app.use(cors());
+  app.use(helmet())
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
   app.use(morgan('dev'));
@@ -19,7 +21,7 @@ const server = () => {
   app.get('/', (_, res) => {
     res.status(200).json({
       data: {
-        message: 'hi there! kindly use the required base url',
+        message: `API is now live!!! 🚀🚀🚀`,
       },
     });
   });

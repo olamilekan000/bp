@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon app",
-    "lint": "eslint ./index.js ./src --fix"
+    "lint": "eslint ./index.js ./src --fix",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "Olalekan Odukoya",
@@ -16,9 +17,11 @@
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
     "express": "^4.17.1",
     "helmet": "^4.4.1",
     "joi": "^17.2.1",
+    "line-reader": "^0.4.0",
     "mongoose": "^5.10.5",
     "morgan": "^1.10.0",
     "uuid": "^8.3.0",

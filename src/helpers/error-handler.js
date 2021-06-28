@@ -1,8 +1,11 @@
-const ErrorHandler = (err, _, res, __) => {
-  // render the error page
+const logger = require('../config/winston');
 
-  res.status(err.status || 500);
-  res.json({ error: err.message });
+const ErrorHandler = (error, _, res, __) => {
+  // render the error page
+  logger.log({ level: 'error', message: error.message });
+
+  res.status(error.status || 500);
+  res.json({ error: error.message });
 };
 
 module.exports = ErrorHandler;

@@ -1,22 +1,81 @@
 const adaptRequest = require('../../helpers/adapt-request');
-const user = require('.');
+const logger = require('../../config/winston');
 
-const userControllers = {
-  createUser: (req, res) => {
-    const httpRequest = adaptRequest(req);
+class UserController {
+  constructor({ UserService }) {
+    this.UserService = UserService;
 
-    user
-      .createUser(httpRequest)
-      .then(({ headers, statusCode, data }) => {
-        res.set(headers).status(statusCode).send(data);
-      })
-      .catch(() => res
-        .status(500)
-        .json({
-          error: 'Internal server error',
-        })
-        .end());
-  },
-};
+    this.createUser = this.createUser.bind(this);
+    this.getUsers = this.getUsers.bind(this);
+    this.findUser = this.findUser.bind(this);
+    this.updateUser = this.updateUser.bind(this);
+    this.deleteUser = this.deleteUser.bind(this);
+  }
 
-module.exports = userControllers;
+  async createUser(req, res, next) {
+    try {
+      const httpRequest = adaptRequest(req);
+
+      const { headers, statusCode, data } = await this.UserService.createUser(httpRequest);
+
+      res.set(headers).status(statusCode).send(data);
+    } catch (error) {
+      logger.log({ level: 'error', message: error.message });
+      next(error);
+    }
+  }
+
+  async getUsers(req, res, next) {
+    try {
+      const httpRequest = adaptRequest(req);
+
+      const { headers, statusCode, data } = await this.UserService.getUsers(httpRequest);
+
+      res.set(headers).status(statusCode).send(data);
+    } catch (error) {
+      logger.log({ level: 'error', message: error.message });
+      next(error);
+    }
+  }
+
+  async findUser(req, res, next) {
+    try {
+      const httpRequest = adaptRequest(req);
+
+      const { headers, statusCode, data } = await this.UserService.findUser(httpRequest);
+
+      res.set(headers).status(statusCode).send(data);
+    } catch (error) {
+      logger.log({ level: 'error', message: error.message });
+      next(error);
+    }
+  }
+
+  async updateUser(req, res, next) {
+    try {
+      const httpRequest = adaptRequest(req);
+
+      const { headers, statusCode, data } = await this.UserService.updateUser(httpRequest);
+
+      res.set(headers).status(statusCode).send(data);
+    } catch (error) {
+      logger.log({ level: 'error', message: error.message });
+      next(error);
+    }
+  }
+
+  async deleteUser(req, res, next) {
+    try {
+      const httpRequest = adaptRequest(req);
+
+      const { headers, statusCode, data } = await this.UserService.deleteUser(httpRequest);
+
+      res.set(headers).status(statusCode).send(data);
+    } catch (error) {
+      logger.log({ level: 'error', message: error.message });
+      next(error);
+    }
+  }
+}
+
+module.exports = UserController;

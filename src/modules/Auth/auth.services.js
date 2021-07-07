@@ -24,7 +24,7 @@ class AuthService {
   }
 
   async login(httpRequest) {
-    console.log('httpRequest', httpRequest);
+    
     const { body: { email, password } } = httpRequest;
 
     const { UserDataAccess, AuthDataAccess } = this;

@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon app",
     "lint": "eslint ./index.js ./src --fix",
-    "test": "mocha **/**/tests/**/*.spec.js"
+    "test": "mocha **/**/tests/**/*.spec.js",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "Olalekan Odukoya",
@@ -30,20 +31,12 @@
     "eslint": "^7.16.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
-    "husky": "^7.0.0",
+    "husky": "^7.0.1",
     "lint-staged": "^11.0.0",
     "mocha": "^9.0.2",
     "nodemon": "^2.0.4"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
-    "*.js": [
-      "eslint ./index.js ./src --fix",
-      "git add"
-    ]
+    "*.js": ["eslint --cache --fix", "npm run test"]
   }
 }

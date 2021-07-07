@@ -18,6 +18,7 @@ const UserSchema = new Schema({
   deleted: Boolean,
   type: String,
   password: String,
+  userType: String,
 },
 {
   timestamps: {

@@ -23,12 +23,12 @@ function softDeletePlugin(schema) {
     'updateMany',
   ];
 
-  const excludeInFindQueriesIsDeleted = async function (next) {
+  const excludeInFindQueriesIsDeleted = function (next) {
     this.where({ deleted: false });
     next();
   };
 
-  const excludeInDeletedInAggregateMiddleware = async function (next) {
+  const excludeInDeletedInAggregateMiddleware = function (next) {
     this.pipeline().unshift({ $match: { deleted: false } });
     next();
   };

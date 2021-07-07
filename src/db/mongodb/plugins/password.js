@@ -25,8 +25,8 @@ const changePasswordPlugin = (schema) => {
 
     bcrypt.genSalt(SALT_SCH, (err, salt) => {
       if (err) return next(err);
-      bcrypt.hash(password, salt, (err, hash) => {
-        if (err) return next(err);
+      bcrypt.hash(password, salt, (err2, hash) => {
+        if (err2) return next(err2);
         this.getUpdate().$set.password = hash;
         next();
       });

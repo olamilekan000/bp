@@ -9,7 +9,7 @@ class UserController {
     this.getUsers = this.getUsers.bind(this);
     this.findUser = this.findUser.bind(this);
     this.updateUser = this.updateUser.bind(this);
-    this.deleteUser =    this.deleteUser.bind(this);
+    this.deleteUser =        this.deleteUser.bind(this);
   }
 
   async createUser(req, res, next) {

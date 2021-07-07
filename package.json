@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "nodemon app",
     "lint": "eslint ./index.js ./src --fix",
-    "prepare": "husky install",
     "test": "mocha **/**/tests/**/*.spec.js"
   },
   "keywords": [],

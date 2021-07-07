@@ -1,13 +1,10 @@
-const validator = (validationSchema) => {
-
-  return (req, res, next) => {
-    validationSchema
+const validator = (validationSchema) => (req, res, next) => {
+  validationSchema
     .validateAsync(req.body)
     .then(() => {
       next();
     })
     .catch((e) => {
-  
       res
         .status(400)
         .json({
@@ -15,8 +12,6 @@ const validator = (validationSchema) => {
         })
         .end();
     });
-  }
-
-}
+};
 
 module.exports = validator;

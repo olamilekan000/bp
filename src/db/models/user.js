@@ -13,7 +13,7 @@ const UserSchema = new Schema({
     unique: true,
   },
   permissions: [String],
-  isPasswordChanged: Boolean,  
+  isPasswordChanged: Boolean,
   deletedAt: { type: Date, default: null },
   deleted: Boolean,
   type: String,
@@ -27,10 +27,10 @@ const UserSchema = new Schema({
   versionKey: false,
 });
 
-softDeletePlugin(UserSchema)
-hashPasswordPlugin(UserSchema)
-changePasswordPlugin(UserSchema)
-comparePasswordPlugin(UserSchema)
+softDeletePlugin(UserSchema);
+hashPasswordPlugin(UserSchema);
+changePasswordPlugin(UserSchema);
+comparePasswordPlugin(UserSchema);
 
 const UserModel = mongoose.model('Users', UserSchema);
 

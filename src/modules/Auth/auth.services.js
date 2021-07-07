@@ -6,7 +6,7 @@ const makeHttpError = require('../../helpers/http-error');
 class AuthService {
   constructor({ UserDataAccess, AuthDataAccess }) {
     this.UserDataAccess = UserDataAccess;
-    this.AuthDataAccess = AuthDataAccess
+    this.AuthDataAccess = AuthDataAccess;
   }
 
   async createUser(httpRequest) {
@@ -24,8 +24,8 @@ class AuthService {
   }
 
   async login(httpRequest) {
-    console.log('httpRequest', httpRequest)
-    const { body: {email, password} } = httpRequest;
+    console.log('httpRequest', httpRequest);
+    const { body: { email, password } } = httpRequest;
 
     const { UserDataAccess, AuthDataAccess } = this;
 
@@ -36,30 +36,30 @@ class AuthService {
     if (!user) {
       return makeHttpError({
         statusCode: 404,
-        errorMessage: "A user with this email does not exist",
+        errorMessage: 'A user with this email does not exist',
       });
-    }  
-    
+    }
+
     const isPassword = await AuthDataAccess.login({
       password,
       _id: user._id,
-    });    
+    });
 
     if (!isPassword) {
       return makeHttpError({
         statusCode: 401,
-        errorMessage: "You have entered a wrong user credentials.",
+        errorMessage: 'You have entered a wrong user credentials.',
       });
-    }   
-    
-    const token = createToken(user);    
+    }
+
+    const token = createToken(user);
 
     return makeHttpSuccess({
       statusCode: 200,
       successMessage: 'ok',
       successData: {
         ...user,
-        token
+        token,
       },
     });
   }
@@ -67,7 +67,7 @@ class AuthService {
   async changePassword(httpRequest) {
     const { body, sub } = httpRequest;
 
-    const { UserDataAccess, AuthDataAccess } = this;    
+    const { UserDataAccess, AuthDataAccess } = this;
 
     const existingUser = await UserDataAccess.findUserByParams({
       _id: sub._id,
@@ -76,7 +76,7 @@ class AuthService {
     if (!existingUser) {
       return makeHttpError({
         statusCode: 404,
-        errorMessage: "A user with this email does not exist",
+        errorMessage: 'A user with this email does not exist',
       });
     }
 
@@ -88,7 +88,7 @@ class AuthService {
     if (!isPassword) {
       return makeHttpError({
         statusCode: 401,
-        errorMessage: "You have entered a wrong user credentials.",
+        errorMessage: 'You have entered a wrong user credentials.',
       });
     }
 
@@ -99,7 +99,7 @@ class AuthService {
 
     return makeHttpSuccess({
       statusCode: 200,
-      successMessage: "Password was succefully changed",
+      successMessage: 'Password was succefully changed',
       successData: {
         first_name: updatedUser.first_name,
         last_name: updatedUser.last_name,
@@ -112,9 +112,9 @@ class AuthService {
   }
 
   async forgotPassword(httpRequest) {
-    const { body: {email} } = httpRequest;
+    const { body: { email } } = httpRequest;
 
-    const { UserDataAccess, AuthDataAccess } = this;  
+    const { UserDataAccess, AuthDataAccess } = this;
 
     const user = await UserDataAccess.findUserByParams({
       email,
@@ -123,7 +123,7 @@ class AuthService {
     if (!user) {
       return makeHttpError({
         statusCode: 400,
-        errorMessage: "",
+        errorMessage: '',
       });
     }
 
@@ -146,15 +146,15 @@ class AuthService {
 
     return makeHttpSuccess({
       statusCode: 200,
-      successMessage: "An email has been sent to your account.",
+      successMessage: 'An email has been sent to your account.',
       successData: {},
     });
   }
 
   async resetPassword(httpRequest) {
-    const { params: {token}, body: {id, password} } = httpRequest;
+    const { params: { token }, body: { id, password } } = httpRequest;
 
-    const { AuthDataAccess } = this; 
+    const { AuthDataAccess } = this;
 
     const user = await AuthDataAccess.findUserByPasswordExpireTime({
       token,
@@ -163,7 +163,7 @@ class AuthService {
     if (!user) {
       return makeHttpError({
         statusCode: 401,
-        errorMessage: "Invalid token",
+        errorMessage: 'Invalid token',
       });
     }
 
@@ -183,7 +183,7 @@ class AuthService {
 
     return makeHttpSuccess({
       statusCode: 200,
-      successMessage: "Your password has been successfully changed",
+      successMessage: 'Your password has been successfully changed',
       successData: updatedUser,
     });
   }

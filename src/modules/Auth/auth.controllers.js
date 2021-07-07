@@ -10,7 +10,6 @@ class AuthController {
     this.changePassword = this.changePassword.bind(this);
     this.forgotPassword = this.forgotPassword.bind(this);
     this.resetPassword = this.resetPassword.bind(this);
-
   }
 
   async createUser(req, res, next) {

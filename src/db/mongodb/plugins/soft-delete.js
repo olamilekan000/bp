@@ -1,5 +1,4 @@
 function softDeletePlugin(schema) {
-  
   schema.add({
     deleted: {
       type: Boolean,
@@ -39,6 +38,6 @@ function softDeletePlugin(schema) {
   });
 
   schema.pre('aggregate', excludeInDeletedInAggregateMiddleware);
-};
+}
 
-module.exports = softDeletePlugin
+module.exports = softDeletePlugin;

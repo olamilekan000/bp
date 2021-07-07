@@ -11,7 +11,7 @@ const createUserValidator = Joi.object({
     .error(new Error('Email is required.')),
   password: Joi.string()
     .required()
-    .error(new Error('Password is required.')),    
+    .error(new Error('Password is required.')),
 });
 
 module.exports = createUserValidator;

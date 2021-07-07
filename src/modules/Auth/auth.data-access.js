@@ -5,7 +5,6 @@ const uuid = require('uuid').v4;
 */
 
 const AuthDataAccess = ({ UserModel }) => {
-
   const login = async ({ _id, password }) => {
     const user = await UserModel.findOne({ _id });
 
@@ -26,7 +25,7 @@ const AuthDataAccess = ({ UserModel }) => {
           is_password_changed: true,
         },
       },
-      { new: true }
+      { new: true },
     );
     return await newUserPwd.save();
   };
@@ -40,11 +39,11 @@ const AuthDataAccess = ({ UserModel }) => {
           resetPasswordExpires, // 1 hour
         },
       },
-      { new: true }
+      { new: true },
     );
     return await newUserPwd.save();
   };
-  
+
   const findUserByPasswordExpireTime = async ({
     token,
     resetPasswordExpires = Date.now(),
@@ -54,7 +53,7 @@ const AuthDataAccess = ({ UserModel }) => {
       resetPasswordExpires: { $gt: resetPasswordExpires },
     });
     return user;
-  };  
+  };
 
   const resetPassword = async ({ _id, password }) => {
     const newUserPwd = await userModel.findOneAndUpdate(
@@ -66,12 +65,10 @@ const AuthDataAccess = ({ UserModel }) => {
           resetPasswordExpires: undefined,
         },
       },
-      { new: true }
+      { new: true },
     );
     return await newUserPwd.save();
   };
-
-
 
   return {
     login,

@@ -9,6 +9,9 @@ const createUserValidator = Joi.object({
     .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
     .required()
     .error(new Error('Email is required.')),
+  password: Joi.string()
+    .required()
+    .error(new Error('Password is required.')),    
 });
 
 module.exports = createUserValidator;

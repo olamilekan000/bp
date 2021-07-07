@@ -9,6 +9,7 @@ const environmentConfig = () => {
       envConfig = {
         mongoBD: process.env.MONGODB_URL_DEV,
         port: process.env.PORT,
+        jwtSecret: process.env.JWT_SECRET,
       };
       break;
   }

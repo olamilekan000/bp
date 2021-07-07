@@ -66,12 +66,12 @@ class UserService {
 
     const { UserDataAccess } = this;
 
-    const user = await UserDataAccess.deleteUser(id);
+    const deletedUser = await UserDataAccess.deleteUser(id);
 
     return makeHttpSuccess({
       statusCode: 200,
       successMessage: 'ok',
-      successData: user,
+      successData: deletedUser,
     });
   }
 }

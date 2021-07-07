@@ -1,4 +1,5 @@
 const { container } = require('../../config/container');
+const createUserValidator = require('../../config/Joi/createUser');
 const validator = require('../../middlewares/validator');
 
 const userRoutes = (Router) => {
@@ -33,6 +34,7 @@ const userRoutes = (Router) => {
   router
     .route('/')
     .post(
+      validator(createUserValidator),
       UserController.createUser,
     );
 

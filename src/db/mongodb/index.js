@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const environmentConfig = require('../config/environment');
-const logger = require('../config/winston');
+const environmentConfig = require('../../config/environment');
+const logger = require('../../config/winston');
 
 const boostrapMongoose = () => new Promise((resolve, reject) => {
   const { mongoBD } = environmentConfig();
@@ -9,6 +9,7 @@ const boostrapMongoose = () => new Promise((resolve, reject) => {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
+    useFindAndModify: false,
   });
   mongoose.connection.once('open', () => {
     logger.log('info', 'Now connected to the database');

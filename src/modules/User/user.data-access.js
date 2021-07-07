@@ -5,6 +5,7 @@ const uuid = require('uuid').v4;
 */
 
 const UserDataAccess = ({ UserModel }) => {
+
   const createUser = async (user) => {
     const newUser = new UserModel({ _id: `user-${uuid()}`, ...user });
     const savedUser = newUser.save();
@@ -39,21 +40,35 @@ const UserDataAccess = ({ UserModel }) => {
     return await user.save();
   };
 
-  const deleteUser = async (_id, params = {}) => {
+  const deleteUser = async (_id) => {
+    await UserModel.findOneAndUpdate(
+      { _id },
+      {
+        $set: {
+          deleted: true,
+          deletedAt: new Date().valueOf()
+        },
+      },
+      { new: true },
+    );
+    return true;
+  };  
+
+  const deleteUserPermanently = async (_id, params = {}) => {
     const user = await UserModel.findOneAndDelete(
       { _id },
       params,
     );
-    return user;
-  };
+    return user
+  };    
 
-  return {
+  return Object.freeze({
     createUser,
     getUsers,
     findUserByParams,
     findUserAndUpdate,
     deleteUser,
-  };
+  });
 };
 
 module.exports = UserDataAccess;

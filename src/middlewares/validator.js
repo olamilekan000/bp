@@ -1,21 +1,22 @@
-const createUserValidator = require('../config/Joi/createUser');
+const validator = (validationSchema) => {
 
-const validator = {
-  validateUser: async (req, res, next) => {
-    createUserValidator
-      .validateAsync(req.body)
-      .then(() => {
-        next();
-      })
-      .catch((e) => {
-        res
-          .status(400)
-          .json({
-            error: e.message,
-          })
-          .end();
-      });
-  },
-};
+  return (req, res, next) => {
+    validationSchema
+    .validateAsync(req.body)
+    .then(() => {
+      next();
+    })
+    .catch((e) => {
+  
+      res
+        .status(400)
+        .json({
+          error: e.message,
+        })
+        .end();
+    });
+  }
+
+}
 
 module.exports = validator;

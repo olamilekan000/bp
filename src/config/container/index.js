@@ -4,7 +4,7 @@ const { containerNameFormatter } = require('../../helpers/formatName');
 
 const container = awilix.createContainer();
 
-const setup = () => {
+const setupContainer = () => {
   container.loadModules(['../../modules/**/**.services.js'], {
     cwd: __dirname,
     resolverOptions: {
@@ -40,5 +40,5 @@ const setup = () => {
 
 module.exports = {
   container,
-  setup,
+  setupContainer,
 };

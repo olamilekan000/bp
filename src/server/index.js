@@ -5,9 +5,11 @@ const helmet = require('helmet');
 
 const ErrorHandler = require('../helpers/error-handler');
 const apiRouter = require('./routes');
-const { setup } = require('../config/container');
+const { setupContainer } = require('../config/container');
 
 const server = () => {
+  setupContainer();
+
   const app = express();
 
   app.use(cors());
@@ -17,7 +19,6 @@ const server = () => {
 
   app.use(morgan('dev'));
 
-  setup();
   app.use('/api/v1', apiRouter(express.Router));
 
   app.get('/', (_, res) => {

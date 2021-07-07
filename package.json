@@ -32,6 +32,7 @@
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "husky": "^7.0.0",
+    "lint-staged": "^11.0.0",
     "mocha": "^9.0.2",
     "nodemon": "^2.0.4"
   },
@@ -41,6 +42,9 @@
     }
   },
   "lint-staged": {
-    "*.{js}": ["./node_modules/.bin/eslint — fix", "git add"]
+    "*.{js}": [
+      "npm run lint",
+      "git add"
+    ]
   }
 }

@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 
 const SALT_SCH = 10;
 
+
 const hashPasswordPlugin = (schema) => {
   schema.pre('save', function (next) {
     if (!this.isModified('password')) return next();

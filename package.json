@@ -37,6 +37,6 @@
     "nodemon": "^2.0.4"
   },
   "lint-staged": {
-    "**/**/tests/**/*.spec.js": ["npm run test"]
+    "*.spec.js": ["npm run test"]
   }
 }

@@ -24,6 +24,7 @@ module.exports = {
     'brace-style': ['error', 'stroustrup'],
     'max-len': ['error', {code: 100, tabWidth: 2}],
     'no-console': 'off',
-    'func-names': 'off'
+    'func-names': 'off',
+    'brace-style': 'off'
   }
 };

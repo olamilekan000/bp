@@ -1,6 +1,6 @@
 const awilix = require('awilix');
 
-const { containerNameFormatter } = require('../../helpers/formatName');
+const {containerNameFormatter} = require('../../helpers/formatName');
 
 const container = awilix.createContainer();
 
@@ -8,37 +8,37 @@ const setupContainer = () => {
   container.loadModules(['../../modules/**/**.services.js'], {
     cwd: __dirname,
     resolverOptions: {
-      register: awilix.asClass,
+      register: awilix.asClass
     },
-    formatName: containerNameFormatter('Service'),
+    formatName: containerNameFormatter('Service')
   });
 
   container.loadModules(['../../modules/**/**.controllers.js'], {
     cwd: __dirname,
     resolverOptions: {
-      register: awilix.asClass,
+      register: awilix.asClass
     },
-    formatName: containerNameFormatter('Controller'),
+    formatName: containerNameFormatter('Controller')
   });
 
   container.loadModules(['../../modules/**/**.data-access.js'], {
     cwd: __dirname,
     resolverOptions: {
-      register: awilix.asFunction,
+      register: awilix.asFunction
     },
-    formatName: containerNameFormatter('DataAccess'),
+    formatName: containerNameFormatter('DataAccess')
   });
 
   container.loadModules(['../../database/models/**/*.js'], {
     cwd: __dirname,
     resolverOptions: {
-      register: awilix.asValue,
+      register: awilix.asValue
     },
-    formatName: containerNameFormatter('Model'),
+    formatName: containerNameFormatter('Model')
   });
 };
 
 module.exports = {
   container,
-  setupContainer,
+  setupContainer
 };

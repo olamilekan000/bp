@@ -1,11 +1,11 @@
-const makeHttpError = ({ statusCode, errorMessage }) => ({
+const makeHttpError = ({statusCode, errorMessage}) => ({
   headers: {
-    'Content-Type': 'application/json',
+    'Content-Type': 'application/json'
   },
   statusCode,
   data: JSON.stringify({
-    error: errorMessage,
-  }),
+    error: errorMessage
+  })
 });
 
 module.exports = makeHttpError;

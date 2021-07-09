@@ -18,7 +18,7 @@ const hashPasswordPlugin = (schema) => {
 
 const changePasswordPlugin = (schema) => {
   schema.pre('findOneAndUpdate', function (next) {
-    const { password } = this.getUpdate().$set;
+    const {password} = this.getUpdate().$set;
     if (!password) {
       return next();
     }
@@ -43,5 +43,5 @@ const comparePasswordPlugin = (schema) => {
 module.exports = {
   hashPasswordPlugin,
   changePasswordPlugin,
-  comparePasswordPlugin,
+  comparePasswordPlugin
 };

@@ -1,13 +1,16 @@
-const makeHttpSuccess = ({ statusCode, successMessage, successData = {} }, params = {}) => ({
+const makeHttpSuccess = (
+  {statusCode, successMessage, successData = {}},
+  params = {}
+) => ({
   headers: {
-    'Content-Type': 'application/json',
+    'Content-Type': 'application/json'
   },
   statusCode,
   data: JSON.stringify({
     success: successMessage,
     data: successData,
-    ...params,
-  }),
+    ...params
+  })
 });
 
 module.exports = makeHttpSuccess;

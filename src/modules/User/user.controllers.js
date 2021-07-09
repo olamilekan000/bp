@@ -2,7 +2,7 @@ const adaptRequest = require('../../helpers/adapt-request');
 const logger = require('../../config/winston');
 
 class UserController {
-  constructor({ UserService }) {
+  constructor({UserService}) {
     this.UserService = UserService;
 
     this.createUser = this.createUser.bind(this);
@@ -16,11 +16,13 @@ class UserController {
     try {
       const httpRequest = adaptRequest(req);
 
-      const { headers, statusCode, data } = await this.UserService.createUser(httpRequest);
+      const {headers, statusCode, data} = await this.UserService.createUser(
+        httpRequest
+      );
 
       res.set(headers).status(statusCode).send(data);
     } catch (error) {
-      logger.log({ level: 'error', message: error.message });
+      logger.log({level: 'error', message: error.message});
       next(error);
     }
   }
@@ -29,11 +31,13 @@ class UserController {
     try {
       const httpRequest = adaptRequest(req);
 
-      const { headers, statusCode, data } = await this.UserService.getUsers(httpRequest);
+      const {headers, statusCode, data} = await this.UserService.getUsers(
+        httpRequest
+      );
 
       res.set(headers).status(statusCode).send(data);
     } catch (error) {
-      logger.log({ level: 'error', message: error.message });
+      logger.log({level: 'error', message: error.message});
       next(error);
     }
   }
@@ -42,11 +46,13 @@ class UserController {
     try {
       const httpRequest = adaptRequest(req);
 
-      const { headers, statusCode, data } = await this.UserService.findUser(httpRequest);
+      const {headers, statusCode, data} = await this.UserService.findUser(
+        httpRequest
+      );
 
       res.set(headers).status(statusCode).send(data);
     } catch (error) {
-      logger.log({ level: 'error', message: error.message });
+      logger.log({level: 'error', message: error.message});
       next(error);
     }
   }
@@ -55,11 +61,13 @@ class UserController {
     try {
       const httpRequest = adaptRequest(req);
 
-      const { headers, statusCode, data } = await this.UserService.updateUser(httpRequest);
+      const {headers, statusCode, data} = await this.UserService.updateUser(
+        httpRequest
+      );
 
       res.set(headers).status(statusCode).send(data);
     } catch (error) {
-      logger.log({ level: 'error', message: error.message });
+      logger.log({level: 'error', message: error.message});
       next(error);
     }
   }
@@ -68,11 +76,13 @@ class UserController {
     try {
       const httpRequest = adaptRequest(req);
 
-      const { headers, statusCode, data } = await this.UserService.deleteUser(httpRequest);
+      const {headers, statusCode, data} = await this.UserService.deleteUser(
+        httpRequest
+      );
 
       res.set(headers).status(statusCode).send(data);
     } catch (error) {
-      logger.log({ level: 'error', message: error.message });
+      logger.log({level: 'error', message: error.message});
       next(error);
     }
   }

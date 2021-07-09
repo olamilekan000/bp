@@ -1,32 +1,38 @@
 const mongoose = require('mongoose');
 const softDeletePlugin = require('../mongodb/plugins/soft-delete');
-const { hashPasswordPlugin, changePasswordPlugin, comparePasswordPlugin } = require('../mongodb/plugins/password');
+const {
+  hashPasswordPlugin,
+  changePasswordPlugin,
+  comparePasswordPlugin
+} = require('../mongodb/plugins/password');
 
-const { Schema } = mongoose;
+const {Schema} = mongoose;
 
-const UserSchema = new Schema({
-  _id: String,
-  firstName: String,
-  lastName: String,
-  email: {
+const UserSchema = new Schema(
+  {
+    _id: String,
+    firstName: String,
+    lastName: String,
+    email: {
+      type: String,
+      unique: true
+    },
+    permissions: [String],
+    isPasswordChanged: Boolean,
+    deletedAt: {type: Date, default: null},
+    deleted: Boolean,
     type: String,
-    unique: true,
+    password: String,
+    userType: String
   },
-  permissions: [String],
-  isPasswordChanged: Boolean,
-  deletedAt: { type: Date, default: null },
-  deleted: Boolean,
-  type: String,
-  password: String,
-  userType: String,
-},
-{
-  timestamps: {
-    createdAt: 'created_at',
-    updatedAt: 'updated_at',
-  },
-  versionKey: false,
-});
+  {
+    timestamps: {
+      createdAt: 'created_at',
+      updatedAt: 'updated_at'
+    },
+    versionKey: false
+  }
+);
 
 softDeletePlugin(UserSchema);
 hashPasswordPlugin(UserSchema);

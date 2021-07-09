@@ -1,6 +1,5 @@
 class ServiceCallerService {
-  constructor() {
-  }
+  constructor() {}
 }
 
 module.exports = ServiceCallerService;

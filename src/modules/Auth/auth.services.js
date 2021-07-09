@@ -1,53 +1,55 @@
-const { createToken } = require('../../config/jwt');
+const {createToken} = require('../../config/jwt');
 const generateCryptoToken = require('../../helpers/crypto-gen');
 const makeHttpSuccess = require('../../helpers/http-success');
 const makeHttpError = require('../../helpers/http-error');
 
 class AuthService {
-  constructor({ UserDataAccess, AuthDataAccess }) {
+  constructor({UserDataAccess, AuthDataAccess}) {
     this.UserDataAccess = UserDataAccess;
     this.AuthDataAccess = AuthDataAccess;
   }
 
   async createUser(httpRequest) {
-    const { body } = httpRequest;
+    const {body} = httpRequest;
 
-    const { UserDataAccess } = this;
+    const {UserDataAccess} = this;
 
     const user = await UserDataAccess.createUser(body);
 
     return makeHttpSuccess({
       statusCode: 201,
       successMessage: 'ok',
-      successData: user,
+      successData: user
     });
   }
 
   async login(httpRequest) {
-    const { body: { email, password } } = httpRequest;
+    const {
+      body: {email, password}
+    } = httpRequest;
 
-    const { UserDataAccess, AuthDataAccess } = this;
+    const {UserDataAccess, AuthDataAccess} = this;
 
     const user = await UserDataAccess.findUserByParams({
-      email,
+      email
     });
 
     if (!user) {
       return makeHttpError({
         statusCode: 404,
-        errorMessage: 'A user with this email does not exist',
+        errorMessage: 'A user with this email does not exist'
       });
     }
 
     const isPassword = await AuthDataAccess.login({
       password,
-      _id: user._id,
+      _id: user._id
     });
 
     if (!isPassword) {
       return makeHttpError({
         statusCode: 401,
-        errorMessage: 'You have entered a wrong user credentials.',
+        errorMessage: 'You have entered a wrong user credentials.'
       });
     }
 
@@ -58,42 +60,42 @@ class AuthService {
       successMessage: 'ok',
       successData: {
         ...user,
-        token,
-      },
+        token
+      }
     });
   }
 
   async changePassword(httpRequest) {
-    const { body, sub } = httpRequest;
+    const {body, sub} = httpRequest;
 
-    const { UserDataAccess, AuthDataAccess } = this;
+    const {UserDataAccess, AuthDataAccess} = this;
 
     const existingUser = await UserDataAccess.findUserByParams({
-      _id: sub._id,
+      _id: sub._id
     });
 
     if (!existingUser) {
       return makeHttpError({
         statusCode: 404,
-        errorMessage: 'A user with this email does not exist',
+        errorMessage: 'A user with this email does not exist'
       });
     }
 
     const isPassword = await AuthDataAccess.loginService({
       password: body.currentPassword,
-      _id: sub._id,
+      _id: sub._id
     });
 
     if (!isPassword) {
       return makeHttpError({
         statusCode: 401,
-        errorMessage: 'You have entered a wrong user credentials.',
+        errorMessage: 'You have entered a wrong user credentials.'
       });
     }
 
     const updatedUser = await AuthDataAccess.updatePassword({
       _id: sub._id,
-      newPassword: body.newPassword,
+      newPassword: body.newPassword
     });
 
     return makeHttpSuccess({
@@ -105,24 +107,26 @@ class AuthService {
         middle_name: updatedUser.middle_name,
         user_type: updatedUser.user_type,
         email: updatedUser.email,
-        is_password_changed: updatedUser.updatedUser,
-      },
+        is_password_changed: updatedUser.updatedUser
+      }
     });
   }
 
   async forgotPassword(httpRequest) {
-    const { body: { email } } = httpRequest;
+    const {
+      body: {email}
+    } = httpRequest;
 
-    const { UserDataAccess, AuthDataAccess } = this;
+    const {UserDataAccess, AuthDataAccess} = this;
 
     const user = await UserDataAccess.findUserByParams({
-      email,
+      email
     });
 
     if (!user) {
       return makeHttpError({
         statusCode: 400,
-        errorMessage: '',
+        errorMessage: ''
       });
     }
 
@@ -130,7 +134,7 @@ class AuthService {
     await AuthDataAccess.resetTokens({
       _id: user._id,
       pwdResetToken: token,
-      resetPasswordExpires: Date.now() + 3600000, // 1 hour,
+      resetPasswordExpires: Date.now() + 3600000 // 1 hour,
     });
 
     // await this.mailer({
@@ -146,29 +150,32 @@ class AuthService {
     return makeHttpSuccess({
       statusCode: 200,
       successMessage: 'An email has been sent to your account.',
-      successData: {},
+      successData: {}
     });
   }
 
   async resetPassword(httpRequest) {
-    const { params: { token }, body: { id, password } } = httpRequest;
+    const {
+      params: {token},
+      body: {id, password}
+    } = httpRequest;
 
-    const { AuthDataAccess } = this;
+    const {AuthDataAccess} = this;
 
     const user = await AuthDataAccess.findUserByPasswordExpireTime({
-      token,
+      token
     });
 
     if (!user) {
       return makeHttpError({
         statusCode: 401,
-        errorMessage: 'Invalid token',
+        errorMessage: 'Invalid token'
       });
     }
 
     const updatedUser = await AuthDataAccess.resetPassword({
       _id: id,
-      password,
+      password
     });
 
     // await this.mailer({
@@ -183,7 +190,7 @@ class AuthService {
     return makeHttpSuccess({
       statusCode: 200,
       successMessage: 'Your password has been successfully changed',
-      successData: updatedUser,
+      successData: updatedUser
     });
   }
 }

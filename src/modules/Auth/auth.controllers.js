@@ -2,7 +2,7 @@ const adaptRequest = require('../../helpers/adapt-request');
 const logger = require('../../config/winston');
 
 class AuthController {
-  constructor({ AuthService }) {
+  constructor({AuthService}) {
     this.AuthService = AuthService;
 
     this.createUser = this.createUser.bind(this);
@@ -16,11 +16,13 @@ class AuthController {
     try {
       const httpRequest = adaptRequest(req);
 
-      const { headers, statusCode, data } = await this.AuthService.createUser(httpRequest);
+      const {headers, statusCode, data} = await this.AuthService.createUser(
+        httpRequest
+      );
 
       res.set(headers).status(statusCode).send(data);
     } catch (error) {
-      logger.log({ level: 'error', message: error.message });
+      logger.log({level: 'error', message: error.message});
       next(error);
     }
   }
@@ -29,11 +31,13 @@ class AuthController {
     try {
       const httpRequest = adaptRequest(req);
 
-      const { headers, statusCode, data } = await this.AuthService.login(httpRequest);
+      const {headers, statusCode, data} = await this.AuthService.login(
+        httpRequest
+      );
 
       res.set(headers).status(statusCode).send(data);
     } catch (error) {
-      logger.log({ level: 'error', message: error.message });
+      logger.log({level: 'error', message: error.message});
       next(error);
     }
   }
@@ -42,11 +46,13 @@ class AuthController {
     try {
       const httpRequest = adaptRequest(req);
 
-      const { headers, statusCode, data } = await this.AuthService.changePassword(httpRequest);
+      const {headers, statusCode, data} = await this.AuthService.changePassword(
+        httpRequest
+      );
 
       res.set(headers).status(statusCode).send(data);
     } catch (error) {
-      logger.log({ level: 'error', message: error.message });
+      logger.log({level: 'error', message: error.message});
       next(error);
     }
   }
@@ -55,11 +61,13 @@ class AuthController {
     try {
       const httpRequest = adaptRequest(req);
 
-      const { headers, statusCode, data } = await this.AuthService.forgotPassword(httpRequest);
+      const {headers, statusCode, data} = await this.AuthService.forgotPassword(
+        httpRequest
+      );
 
       res.set(headers).status(statusCode).send(data);
     } catch (error) {
-      logger.log({ level: 'error', message: error.message });
+      logger.log({level: 'error', message: error.message});
       next(error);
     }
   }
@@ -68,11 +76,13 @@ class AuthController {
     try {
       const httpRequest = adaptRequest(req);
 
-      const { headers, statusCode, data } = await this.AuthService.resetPassword(httpRequest);
+      const {headers, statusCode, data} = await this.AuthService.resetPassword(
+        httpRequest
+      );
 
       res.set(headers).status(statusCode).send(data);
     } catch (error) {
-      logger.log({ level: 'error', message: error.message });
+      logger.log({level: 'error', message: error.message});
       next(error);
     }
   }

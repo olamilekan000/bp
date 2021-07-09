@@ -1,4 +1,4 @@
-const { capitalize } = require('./capitalize');
+const {capitalize} = require('./capitalize');
 
 const containerNameFormatter = (group) => (contName, descriptor) => {
   const name = `${capitalize(contName.split('.')[0])}${capitalize(group)}`;
@@ -6,5 +6,5 @@ const containerNameFormatter = (group) => (contName, descriptor) => {
 };
 
 module.exports = {
-  containerNameFormatter,
+  containerNameFormatter
 };

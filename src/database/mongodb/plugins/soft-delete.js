@@ -3,12 +3,12 @@ function softDeletePlugin(schema) {
     deleted: {
       type: Boolean,
       required: true,
-      default: false,
+      default: false
     },
     deletedAt: {
       type: Date,
-      default: null,
-    },
+      default: null
+    }
   });
 
   const typesFindQueryMiddleware = [
@@ -20,16 +20,16 @@ function softDeletePlugin(schema) {
     'findOneAndUpdate',
     'update',
     'updateOne',
-    'updateMany',
+    'updateMany'
   ];
 
   const excludeInFindQueriesIsDeleted = function (next) {
-    this.where({ deleted: false });
+    this.where({deleted: false});
     next();
   };
 
   const excludeInDeletedInAggregateMiddleware = function (next) {
-    this.pipeline().unshift({ $match: { deleted: false } });
+    this.pipeline().unshift({$match: {deleted: false}});
     next();
   };
 

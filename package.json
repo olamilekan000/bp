@@ -41,7 +41,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "npx prettier --write"
+      "npx prettier --write '**/*.js'"
     ]
   }
 }

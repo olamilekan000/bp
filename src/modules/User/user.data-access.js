@@ -11,8 +11,22 @@ const UserDataAccess = ({ UserModel }) => {
     return savedUser;
   };
 
-  const getUsers = async (params = {}) => {
-    const users = await UserModel.find(params).lean().exec();
+  const getUsers = async (params) => {
+    const { page, limit } = params;
+
+    const users = await UserModel.aggregate([
+      {
+        $facet: {
+          data: [
+            { $match: {} },
+            { $skip: page * limit },
+            { $limit: limit },
+          ],
+          total: [{ $count: 'total' }],
+        },
+      },
+    ]);
+
     return users;
   };
 

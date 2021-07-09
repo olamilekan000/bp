@@ -1,4 +1,4 @@
-const makeHttpSuccess = ({ statusCode, successMessage, successData = {} }) => ({
+const makeHttpSuccess = ({ statusCode, successMessage, successData = {} }, params = {}) => ({
   headers: {
     'Content-Type': 'application/json',
   },
@@ -6,6 +6,7 @@ const makeHttpSuccess = ({ statusCode, successMessage, successData = {} }) => ({
   data: JSON.stringify({
     success: successMessage,
     data: successData,
+    ...params,
   }),
 });
 

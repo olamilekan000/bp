@@ -20,16 +20,23 @@ class UserService {
   }
 
   async getUsers(httpRequest) {
-    const { params } = httpRequest;
+    const { queryParams: { limit, page } } = httpRequest;
 
     const { UserDataAccess } = this;
 
-    const users = await UserDataAccess.getUsers(params);
+    const parsedLimit = limit ? parseInt(limit, 10) : 10;
+    const parsedPage = page ? parseInt(page, 10) : 0;
+
+    const users = await UserDataAccess.getUsers({ page: parsedPage, limit: parsedLimit });
 
     return makeHttpSuccess({
       statusCode: 200,
       successMessage: 'ok',
-      successData: users,
+      successData: users[0].data,
+    }, {
+      total: users[0].total[0].total,
+      limit: parsedLimit,
+      page: parsedPage,
     });
   }
 

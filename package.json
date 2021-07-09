@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon app",
-    "lint": "eslint ./index.js ./src --fix",
+    "lint-fix": "eslint ./index.js ./src --fix",
     "test": "mocha **/**/tests/**/*.spec.js",
     "prepare": "husky install"
   },
@@ -37,6 +37,6 @@
     "nodemon": "^2.0.4"
   },
   "lint-staged": {
-    "*.js": ["git add"]
+    "*.js": ["npm run lint-fix"]
   }
 }

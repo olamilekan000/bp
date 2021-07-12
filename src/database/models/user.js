@@ -6,7 +6,7 @@ const {
   comparePasswordPlugin
 } = require('../mongodb/plugins/password');
 
-const {Schema} = mongoose;
+const { Schema } = mongoose;
 
 const UserSchema = new Schema(
   {
@@ -19,7 +19,7 @@ const UserSchema = new Schema(
     },
     permissions: [String],
     isPasswordChanged: Boolean,
-    deletedAt: {type: Date, default: null},
+    deletedAt: { type: Date, default: null },
     deleted: Boolean,
     type: String,
     password: String,

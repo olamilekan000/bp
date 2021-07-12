@@ -24,12 +24,12 @@ function softDeletePlugin(schema) {
   ];
 
   const excludeInFindQueriesIsDeleted = function (next) {
-    this.where({deleted: false});
+    this.where({ deleted: false });
     next();
   };
 
   const excludeInDeletedInAggregateMiddleware = function (next) {
-    this.pipeline().unshift({$match: {deleted: false}});
+    this.pipeline().unshift({ $match: { deleted: false } });
     next();
   };
 

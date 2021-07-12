@@ -1,4 +1,4 @@
-const {container} = require('../../config/container');
+const { container } = require('../../config/container');
 const validator = require('../../middlewares/validator');
 
 const authRoutes = (Router) => {

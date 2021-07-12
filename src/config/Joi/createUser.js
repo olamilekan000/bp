@@ -6,7 +6,7 @@ const createUserValidator = Joi.object({
     .error(new Error('First name is required.')),
   lastName: Joi.string().required().error(new Error('Last name is required.')),
   email: Joi.string()
-    .email({minDomainSegments: 2, tlds: {allow: ['com', 'net']}})
+    .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
     .required()
     .error(new Error('Email is required.')),
   password: Joi.string().required().error(new Error('Password is required.'))

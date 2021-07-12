@@ -1,4 +1,4 @@
-const {container} = require('../../config/container');
+const { container } = require('../../config/container');
 const createUserValidator = require('../../config/Joi/createUser');
 const validator = require('../../middlewares/validator');
 

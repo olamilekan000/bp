@@ -1,4 +1,4 @@
-const makeHttpError = ({statusCode, errorMessage}) => ({
+const makeHttpError = ({ statusCode, errorMessage }) => ({
   headers: {
     'Content-Type': 'application/json'
   },

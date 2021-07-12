@@ -2,9 +2,9 @@
   @param - database instance (e.g User Model)
 */
 
-const AuthDataAccess = ({UserModel}) => {
-  const login = async ({_id, password}) => {
-    const user = await UserModel.findOne({_id});
+const AuthDataAccess = ({ UserModel }) => {
+  const login = async ({ _id, password }) => {
+    const user = await UserModel.findOne({ _id });
 
     if (!user) {
       return false;
@@ -14,30 +14,30 @@ const AuthDataAccess = ({UserModel}) => {
     return isPassword;
   };
 
-  const updatePassword = async ({_id, newPassword}) => {
+  const updatePassword = async ({ _id, newPassword }) => {
     const newUserPwd = await userModel.findOneAndUpdate(
-      {_id},
+      { _id },
       {
         $set: {
           password: newPassword,
           is_password_changed: true
         }
       },
-      {new: true}
+      { new: true }
     );
     return await newUserPwd.save();
   };
 
-  const resetTokens = async ({_id, pwdResetToken, resetPasswordExpires}) => {
+  const resetTokens = async ({ _id, pwdResetToken, resetPasswordExpires }) => {
     const newUserPwd = await userModel.findOneAndUpdate(
-      {_id},
+      { _id },
       {
         $set: {
           resetPasswordToken: pwdResetToken,
           resetPasswordExpires // 1 hour
         }
       },
-      {new: true}
+      { new: true }
     );
     return await newUserPwd.save();
   };
@@ -48,14 +48,14 @@ const AuthDataAccess = ({UserModel}) => {
   }) => {
     const user = await userModel.findOne({
       resetPasswordToken: token,
-      resetPasswordExpires: {$gt: resetPasswordExpires}
+      resetPasswordExpires: { $gt: resetPasswordExpires }
     });
     return user;
   };
 
-  const resetPassword = async ({_id, password}) => {
+  const resetPassword = async ({ _id, password }) => {
     const newUserPwd = await userModel.findOneAndUpdate(
-      {_id},
+      { _id },
       {
         $set: {
           password,
@@ -63,7 +63,7 @@ const AuthDataAccess = ({UserModel}) => {
           resetPasswordExpires: undefined
         }
       },
-      {new: true}
+      { new: true }
     );
     return await newUserPwd.save();
   };

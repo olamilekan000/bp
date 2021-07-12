@@ -1,4 +1,4 @@
-const {capitalize} = require('./capitalize');
+const { capitalize } = require('./capitalize');
 
 const containerNameFormatter = (group) => (contName) => {
   const name = `${capitalize(contName.split('.')[0])}${capitalize(group)}`;

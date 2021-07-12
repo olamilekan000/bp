@@ -4,7 +4,7 @@ const logger = require('../../config/winston');
 
 const boostrapMongoose = () =>
   new Promise((resolve, reject) => {
-    const {mongoBD} = environmentConfig();
+    const { mongoBD } = environmentConfig();
 
     mongoose.connect(mongoBD, {
       useNewUrlParser: true,

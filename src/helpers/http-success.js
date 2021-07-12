@@ -1,5 +1,5 @@
 const makeHttpSuccess = (
-  {statusCode, successMessage, successData = {}},
+  { statusCode, successMessage, successData = {} },
   params = {}
 ) => ({
   headers: {

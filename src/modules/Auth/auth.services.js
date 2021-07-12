@@ -1,18 +1,18 @@
-const {createToken} = require('../../config/jwt');
+const { createToken } = require('../../config/jwt');
 const generateCryptoToken = require('../../helpers/crypto-gen');
 const makeHttpSuccess = require('../../helpers/http-success');
 const makeHttpError = require('../../helpers/http-error');
 
 class AuthService {
-  constructor({UserDataAccess, AuthDataAccess}) {
+  constructor({ UserDataAccess, AuthDataAccess }) {
     this.UserDataAccess = UserDataAccess;
     this.AuthDataAccess = AuthDataAccess;
   }
 
   async createUser(httpRequest) {
-    const {body} = httpRequest;
+    const { body } = httpRequest;
 
-    const {UserDataAccess} = this;
+    const { UserDataAccess } = this;
 
     const user = await UserDataAccess.createUser(body);
 
@@ -25,10 +25,10 @@ class AuthService {
 
   async login(httpRequest) {
     const {
-      body: {email, password}
+      body: { email, password }
     } = httpRequest;
 
-    const {UserDataAccess, AuthDataAccess} = this;
+    const { UserDataAccess, AuthDataAccess } = this;
 
     const user = await UserDataAccess.findUserByParams({
       email
@@ -66,9 +66,9 @@ class AuthService {
   }
 
   async changePassword(httpRequest) {
-    const {body, sub} = httpRequest;
+    const { body, sub } = httpRequest;
 
-    const {UserDataAccess, AuthDataAccess} = this;
+    const { UserDataAccess, AuthDataAccess } = this;
 
     const existingUser = await UserDataAccess.findUserByParams({
       _id: sub._id
@@ -114,10 +114,10 @@ class AuthService {
 
   async forgotPassword(httpRequest) {
     const {
-      body: {email}
+      body: { email }
     } = httpRequest;
 
-    const {UserDataAccess, AuthDataAccess} = this;
+    const { UserDataAccess, AuthDataAccess } = this;
 
     const user = await UserDataAccess.findUserByParams({
       email
@@ -156,11 +156,11 @@ class AuthService {
 
   async resetPassword(httpRequest) {
     const {
-      params: {token},
-      body: {id, password}
+      params: { token },
+      body: { id, password }
     } = httpRequest;
 
-    const {AuthDataAccess} = this;
+    const { AuthDataAccess } = this;
 
     const user = await AuthDataAccess.findUserByPasswordExpireTime({
       token

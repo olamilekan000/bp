@@ -5,7 +5,7 @@ const { containerNameFormatter } = require('../../helpers/formatName');
 const container = awilix.createContainer();
 
 const setupContainer = () => {
-  container.loadModules(['../../modules/**/**.services.js'], {
+  container.loadModules(['../../modules/**/**.service.js'], {
     cwd: __dirname,
     resolverOptions: {
       register: awilix.asClass
@@ -13,7 +13,7 @@ const setupContainer = () => {
     formatName: containerNameFormatter('Service')
   });
 
-  container.loadModules(['../../modules/**/**.controllers.js'], {
+  container.loadModules(['../../modules/**/**.controller.js'], {
     cwd: __dirname,
     resolverOptions: {
       register: awilix.asClass

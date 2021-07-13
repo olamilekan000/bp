@@ -15,7 +15,7 @@ const AuthDataAccess = ({ UserModel }) => {
   };
 
   const updatePassword = async ({ _id, newPassword }) => {
-    const newUserPwd = await userModel.findOneAndUpdate(
+    const newUserPwd = await UserModel.findOneAndUpdate(
       { _id },
       {
         $set: {
@@ -25,11 +25,12 @@ const AuthDataAccess = ({ UserModel }) => {
       },
       { new: true }
     );
-    return await newUserPwd.save();
+    const updatedUser = await newUserPwd.save();
+    return updatedUser;
   };
 
   const resetTokens = async ({ _id, pwdResetToken, resetPasswordExpires }) => {
-    const newUserPwd = await userModel.findOneAndUpdate(
+    const newUserPwd = await UserModel.findOneAndUpdate(
       { _id },
       {
         $set: {
@@ -39,14 +40,15 @@ const AuthDataAccess = ({ UserModel }) => {
       },
       { new: true }
     );
-    return await newUserPwd.save();
+    const updatedUser = await newUserPwd.save();
+    return updatedUser;
   };
 
   const findUserByPasswordExpireTime = async ({
     token,
     resetPasswordExpires = Date.now()
   }) => {
-    const user = await userModel.findOne({
+    const user = await UserModel.findOne({
       resetPasswordToken: token,
       resetPasswordExpires: { $gt: resetPasswordExpires }
     });
@@ -54,7 +56,7 @@ const AuthDataAccess = ({ UserModel }) => {
   };
 
   const resetPassword = async ({ _id, password }) => {
-    const newUserPwd = await userModel.findOneAndUpdate(
+    const newUserPwd = await UserModel.findOneAndUpdate(
       { _id },
       {
         $set: {
@@ -65,7 +67,8 @@ const AuthDataAccess = ({ UserModel }) => {
       },
       { new: true }
     );
-    return await newUserPwd.save();
+    const updatedUser = await newUserPwd.save();
+    return updatedUser;
   };
 
   return {

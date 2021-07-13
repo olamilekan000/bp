@@ -10,7 +10,9 @@ const server = require('./src/server');
     await boostrapMongoose();
     const app = server();
     const { port } = environmentConfig();
-    app.listen(port, () => logger.log('info', `app now listening on ${port}`));
+    app.listen(port, () =>
+      logger.log('info', `app now listening on ${port} 🚀🚀🚀`)
+    );
   } catch (e) {
     throw e;
   }

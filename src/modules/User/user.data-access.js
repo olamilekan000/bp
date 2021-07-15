@@ -57,7 +57,8 @@ const UserDataAccess = ({ UserModel }) => {
       },
       { new: true }
     );
-    return await user.save();
+    const savedUser = await user.save();
+    return savedUser;
   };
 
   const deleteUser = async (_id) => {
@@ -84,7 +85,8 @@ const UserDataAccess = ({ UserModel }) => {
     getUsers,
     findUserByParams,
     findUserAndUpdate,
-    deleteUser
+    deleteUser,
+    deleteUserPermanently
   });
 };
 

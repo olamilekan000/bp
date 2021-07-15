@@ -41,7 +41,7 @@ class UserService {
         successData: users[0].data
       },
       {
-        total: users[0].total[0].total,
+        total: users[0]?.total[0]?.total,
         limit: parsedLimit,
         page: parsedPage
       }

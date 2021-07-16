@@ -53,7 +53,11 @@ function makeDir(){
 
 INITIAL_MODULE_NAME=$1
 
-MODULE_NAME=$(echo $INITIAL_MODULE_NAME |  awk '{print (toupper(substr($0, 1, 1)) tolower(substr($0, 2)))}')
+MODULE_NAME=$(
+  echo $INITIAL_MODULE_NAME | 
+  awk '{print (toupper(substr($0, 1, 1)) tolower(substr($0, 2)))}' | 
+  sed -e "s/-/ /g" | awk '{for (i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) substr($i,2)} 1' | 
+  sed -e "s/ //g")
 
 if [[ ! "$MODULE_NAME" ]]
 then

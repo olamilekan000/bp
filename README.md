@@ -33,6 +33,12 @@ or  with Docker
 docker-compose -f docker-compose.dev.yml up --build
 ```
 
+To create a Module, run:
+
+```sh
+./create-module.sh <name-of-module>
+```
+
 This will launch the server [node](https://nodejs.org/en/) process on port 9093
 
 Linting is set up using [ESlint](https://github.com/eslint/eslint/).

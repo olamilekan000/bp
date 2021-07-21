@@ -13,6 +13,23 @@ const containerNameFormatter = (group) => (contName) => {
   return name;
 };
 
+const filterEmptyObjects = (obj) => {
+  const allObjectValues = Object.keys(obj);
+
+  const newObject = allObjectValues.reduce((acc, currObjKey) => {
+    if (obj[currObjKey]) {
+      return {
+        ...acc,
+        [currObjKey]: obj[currObjKey]
+      };
+    }
+    return acc;
+  }, {});
+
+  return newObject;
+};
+
 module.exports = {
-  containerNameFormatter
+  containerNameFormatter,
+  filterEmptyObjects
 };

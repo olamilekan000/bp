@@ -1,4 +1,5 @@
 const crypto = require('crypto');
+const capitalize = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 
 const generateCryptoToken = () =>
   new Promise((resolve, reject) => {
@@ -11,4 +12,7 @@ const generateCryptoToken = () =>
     });
   });
 
-module.exports = generateCryptoToken;
+module.exports = {
+  capitalize,
+  generateCryptoToken
+};

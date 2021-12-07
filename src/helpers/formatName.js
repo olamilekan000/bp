@@ -1,4 +1,4 @@
-const { capitalize } = require('./capitalize');
+const { capitalize } = require('./utils');
 
 const containerNameFormatter = (group) => (contName) => {
   const sanitizedString = contName.replace(

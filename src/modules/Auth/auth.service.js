@@ -1,7 +1,7 @@
 const { createToken } = require('../../config/jwt');
-const generateCryptoToken = require('../../helpers/crypto-gen');
 const makeHttpSuccess = require('../../helpers/http-success');
 const makeHttpError = require('../../helpers/http-error');
+const { generateCryptoToken } = require('../../helpers/utils');
 
 class AuthService {
   constructor({ UserDataAccess, AuthDataAccess }) {

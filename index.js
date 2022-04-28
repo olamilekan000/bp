@@ -8,7 +8,7 @@ const logger = require('./src/config/winston');
     const { server, mongoose } = await bootstrap();
 
     process.on('SIGTERM', async () => {
-      logger.log('info', 'SIGINT received: Gracefully sutting down');
+      logger.log('info', 'SIGTERM received: Gracefully sutting down');
       await mongoose.disconnect();
       server.close();
       process.exit(0);

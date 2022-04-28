@@ -14,7 +14,7 @@ const boostrapMongoose = () =>
     });
     mongoose.connection.once('open', () => {
       logger.log('info', 'Now connected to the database');
-      resolve();
+      resolve(mongoose);
     });
     mongoose.connection.on('error', () => {
       logger.log('info', "Couldn't connect to the mongodb server");

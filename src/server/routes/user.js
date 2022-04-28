@@ -1,6 +1,6 @@
 const { container } = require('../../config/container');
-const createUserValidator = require('../../config/Joi/createUser');
 const validator = require('../../middlewares/validator');
+const { createUserValidator } = require('../../validators/Joi/user');
 
 const userRoutes = (Router) => {
   const router = Router();

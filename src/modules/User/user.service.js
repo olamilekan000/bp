@@ -1,4 +1,4 @@
-const makeHttpSuccess = require('../../helpers/http-success');
+const { makeHttpSuccess } = require('../../helpers/httpAdapters');
 
 class UserService {
   constructor({ UserDataAccess }) {

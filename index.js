@@ -1,21 +1,26 @@
 /* eslint-disable brace-style */
 /* eslint-disable no-useless-catch */
-require('dotenv').config();
-
-const environmentConfig = require('./src/config/environment');
+const { bootstrap } = require('./boostap');
 const logger = require('./src/config/winston');
-const boostrapMongoose = require('./src/database/mongodb');
-const server = require('./src/server');
 
 (async () => {
   try {
-    await boostrapMongoose();
-    const app = server();
-    const { port } = environmentConfig();
-    app.listen(port, () =>
-      logger.log('info', `app now listening on ${port} 🚀🚀🚀`)
-    );
+    const { server, mongoose } = await bootstrap();
+
+    process.on('SIGTERM', async () => {
+      logger.log('info', 'SIGINT received: Gracefully sutting down');
+      await mongoose.disconnect();
+      server.close();
+      process.exit(0);
+    });
+    process.on('SIGINT', async () => {
+      logger.log('info', 'SIGINT received: Gracefully sutting down');
+      await mongoose.disconnect();
+      server.close();
+      process.exit(0);
+    });
   } catch (e) {
-    throw e;
+    console.error(e);
+    process.exit(1);
   }
 })();

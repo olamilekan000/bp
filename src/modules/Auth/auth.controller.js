@@ -1,6 +1,6 @@
 /* eslint-disable brace-style */
-const adaptRequest = require('../../helpers/adapt-request');
 const logger = require('../../config/winston');
+const { adaptRequest } = require('../../helpers/httpAdapters');
 
 class AuthController {
   constructor({ AuthService }) {

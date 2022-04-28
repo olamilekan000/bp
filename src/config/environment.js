@@ -7,9 +7,13 @@ const environmentConfig = () => {
 
     default:
       envConfig = {
-        mongoBD: process.env.MONGODB_URL_DEV,
+        mongoBD: process.env.MONGODB_URL,
         port: process.env.PORT,
-        jwtSecret: process.env.JWT_SECRET
+        jwtSecret: process.env.JWT_SECRET,
+        microservice: {
+          urls: {},
+          timeout: +(process.env.MICROSERVICE_TIMEOUT || 10000)
+        }
       };
       break;
   }

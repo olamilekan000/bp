@@ -1,6 +1,5 @@
 const awilix = require('awilix');
-
-const { containerNameFormatter } = require('../../helpers/formatName');
+const { containerNameFormatter } = require('../../helpers/utils');
 
 const container = awilix.createContainer();
 

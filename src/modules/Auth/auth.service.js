@@ -1,6 +1,9 @@
 const { createToken } = require('../../config/jwt');
-const makeHttpSuccess = require('../../helpers/http-success');
-const makeHttpError = require('../../helpers/http-error');
+const {
+  makeHttpSuccess,
+  makeHttpError
+} = require('../../helpers/httpAdapters');
+
 const { generateCryptoToken } = require('../../helpers/utils');
 
 class AuthService {

@@ -9,14 +9,14 @@ const logger = require('./src/config/winston');
 
     process.on('SIGTERM', async () => {
       logger.log('info', 'SIGTERM received: Gracefully sutting down');
-      await mongoose.disconnect();
       server.close();
+      await mongoose.disconnect();
       process.exit(0);
     });
     process.on('SIGINT', async () => {
       logger.log('info', 'SIGINT received: Gracefully sutting down');
-      await mongoose.disconnect();
       server.close();
+      await mongoose.disconnect();
       process.exit(0);
     });
   } catch (e) {
